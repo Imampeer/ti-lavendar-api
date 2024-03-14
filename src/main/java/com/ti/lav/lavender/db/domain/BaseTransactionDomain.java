@@ -13,7 +13,7 @@ public class BaseTransactionDomain {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
+    @Column(name = "ID")
     private long id;
 
     @Column(name = "CREATED_BY")

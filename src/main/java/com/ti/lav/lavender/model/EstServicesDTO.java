@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 @Data
 public class EstServicesDTO extends BaseTransactionDTO{
 
+    private Long estId;
     private String name;
     private String categoryType;
     private Long parentId; // Reference to parent service

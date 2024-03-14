@@ -10,6 +10,9 @@ import lombok.Setter;
 @Table(name = "EST_SERVICES")
 public class EstServices extends BaseTransactionDomain{
 
+    @Column(name = "EST_ID")
+    private Long estId;
+
     @Column(name = "ES_NAME")
     private String name;
 

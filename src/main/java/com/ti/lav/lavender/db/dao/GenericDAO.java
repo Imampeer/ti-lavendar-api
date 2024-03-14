@@ -10,16 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 public class GenericDAO {
 
     @Autowired
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void save(Object entity){
         entityManager.persist(entity);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    /*@Transactional(propagation = Propagation.REQUIRED)
     public void update(Object entity){
         entityManager.merge(entity);
+    }*/
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void delete(Object entity){
+        entityManager.remove(entity);
     }
 
     public <T> T findOne(Class<T> type, final long id) {

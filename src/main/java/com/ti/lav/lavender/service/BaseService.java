@@ -10,6 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class BaseService {
@@ -26,6 +31,11 @@ public class BaseService {
             throw new BusinessException("Record not found");
         }
         return dbObj;
+    }
+
+    protected <S,T> T getOne(Class S,Class T, long id) throws BusinessException {
+        Object dbObj = getDBObject(S, id);
+        return (T) modelMapper.map(dbObj,T);
     }
 
     @Transactional
@@ -54,9 +64,38 @@ public class BaseService {
         }
     }
 
-    protected <S,T> T getOne(Class S,Class T, long id) throws BusinessException {
-        Object dbObj = getDBObject(S, id);
-        return (T) modelMapper.map(dbObj,T);
+    protected void saveList(List<? extends BaseTransactionDTO> dtoList, List<? extends BaseTransactionDomain> domainList, Class domainClass) throws BusinessException{
+
+        Map<Long,BaseTransactionDomain> domainMap = domainList.stream().map(o -> (BaseTransactionDomain) o)
+                .collect(Collectors.toMap(BaseTransactionDomain::getId, Function.identity()));
+
+        List<BaseTransactionDomain> domainsToDelete = domainList.stream().map(o -> (BaseTransactionDomain) o)
+                .filter(domain -> dtoList.stream().noneMatch(dto -> dto.getId() == domain.getId()))
+                .collect(Collectors.toList());
+
+        log.info("Savelist for class: "+ domainClass);
+
+        dtoList.forEach(dto -> {
+            if(domainMap.containsKey(dto.getId())){
+                log.info("Domain object exists ID: "+ dto.getId());
+                modelMapper.map(dto,domainMap.get(dto.getId()));
+                genericDAO.save(domainMap.get(dto.getId()));
+                log.info("Update successful "+ domainClass+ " for ID:"+ dto.getId());
+            }else{
+                BaseTransactionDomain dbObj = (BaseTransactionDomain) modelMapper.map(dto,domainClass);
+                genericDAO.save(dbObj);
+                log.info("Insert successful "+ domainClass+ " for ID:"+ dbObj.getId());
+            }
+        });
+
+        domainsToDelete.forEach(dbObj -> {
+            genericDAO.delete(dbObj);
+            log.info("Delete successful "+ domainClass+ " for ID:"+ dbObj.getId());
+        });
+
     }
+
+
+
 
 }
