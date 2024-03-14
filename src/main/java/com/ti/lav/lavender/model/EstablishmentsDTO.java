@@ -1,19 +1,12 @@
-package com.ti.lav.lavender.model.dto;
+package com.ti.lav.lavender.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class EstablishmentsDTO {
+@Data
+public class EstablishmentsDTO extends BaseTransactionDTO{
 
-    private Long id;
     private String name;
     private String about;
     private String addressLine1;

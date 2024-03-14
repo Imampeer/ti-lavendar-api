@@ -1,20 +1,13 @@
-package com.ti.lav.lavender.dao;
+package com.ti.lav.lavender.db.dao;
 
-import com.ti.lav.lavender.model.dto.EstSearchCriteriaDTO;
-import com.ti.lav.lavender.model.dto.EstServicesDTO;
-import com.ti.lav.lavender.model.dto.EstablishmentsDTO;
+import com.ti.lav.lavender.model.EstSearchCriteriaDTO;
+import com.ti.lav.lavender.model.EstablishmentsDTO;
 import jakarta.persistence.EntityManager;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 @Repository
 public class EstSearchDAO {
@@ -50,7 +43,7 @@ public class EstSearchDAO {
     }
 
     private List<EstablishmentsDTO> transformResultToDTO(List<Object[]> resultList) {
-        Map<Long, EstablishmentsDTO> establishmentsMap = new HashMap<>();
+        /*Map<Long, EstablishmentsDTO> establishmentsMap = new HashMap<>();
 
         for (Object[] row : resultList) {
             log.info("--------------------"+ row);
@@ -77,7 +70,8 @@ public class EstSearchDAO {
             establishmentDTO.getServices().add(serviceDTO);
         }
 
-        return new ArrayList<>(establishmentsMap.values());
+        return new ArrayList<>(establishmentsMap.values());*/
+        return null;
     }
 
 

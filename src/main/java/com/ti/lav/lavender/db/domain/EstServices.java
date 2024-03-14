@@ -1,19 +1,14 @@
-package com.ti.lav.lavender.model.domain;
+package com.ti.lav.lavender.db.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "EST_SERVICES")
-public class EstServices {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ES_ID")
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "Est_ID", referencedColumnName = "Est_ID")
-    private Establishments establishment;
+public class EstServices extends BaseTransactionDomain{
 
     @Column(name = "ES_NAME")
     private String name;

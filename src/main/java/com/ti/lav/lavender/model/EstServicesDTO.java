@@ -1,21 +1,12 @@
-package com.ti.lav.lavender.model.dto;
+package com.ti.lav.lavender.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class EstServicesDTO {
+@Data
+public class EstServicesDTO extends BaseTransactionDTO{
 
-    private Long id;
-    private Long establishmentId;
     private String name;
     private String categoryType;
     private Long parentId; // Reference to parent service
