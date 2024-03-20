@@ -15,6 +15,6 @@ public class BaseTransactionDTO {
     private Long createdBy;
     private Date createdDate;
     private Long lastModifiedBy;
-    private Date lastMoifiedDate;
+    private Date lastModifiedDate;
 
 }
