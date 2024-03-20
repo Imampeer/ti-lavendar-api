@@ -26,6 +26,6 @@ public class BaseTransactionDomain {
     private Long lastModifiedBy;
 
     @Column(name = "LAST_MODIFIED_DATE")
-    private Date lastMoifiedDate;
+    private Date lastModifiedDate;
 
 }
